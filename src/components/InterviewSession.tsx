@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import SpeechRecorder from './SpeechRecorder';
 import FeedbackDisplay from './FeedbackDisplay';
+import api from '../services/api';
 
 interface CodingLanguage {
   id: string;
@@ -195,15 +196,12 @@ export default InterviewSession;
 
 // Helper (replace with your actual Gemini API call)
 async function fetchQuestionsFromGemini(n: number, language: string, difficulty: string): Promise<string[]> {
-  const response = await fetch(`/api/gemini/questions?n=${n}&language=${encodeURIComponent(language)}&difficulty=${encodeURIComponent(difficulty)}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await api.get('/gemini/questions', {
+    params: {
+      n,
+      language,
+      difficulty,
     },
   });
-  if (!response.ok) {
-    throw new Error('Failed to fetch questions from Gemini');
-  }
-  const data = await response.json();
-  return data.questions;
+  return response.data.questions;
 }
