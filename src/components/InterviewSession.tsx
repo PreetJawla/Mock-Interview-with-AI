@@ -132,7 +132,7 @@ const InterviewSession: React.FC<InterviewSessionProps> = ({
       </div>
 
       {/* Question and Answer */}
-      {!allDone ? (
+      {(showFeedback || !allDone) ? (
         <div className="space-y-6">
           {!showFeedback ? (
             <SpeechRecorder
@@ -146,7 +146,13 @@ const InterviewSession: React.FC<InterviewSessionProps> = ({
               codingLanguage={codingLanguage}
               difficulty={difficulty}
               onFeedbackReceived={handleFeedbackReceived}
-              onNextQuestion={handleNext}
+              onNextQuestion={() => {
+                setShowFeedback(false);
+                // If not last question, go to next
+                if (currentIdx < NUM_QUESTIONS - 1) {
+                  setCurrentIdx(idx => idx + 1);
+                }
+              }}
             />
           )}
         </div>
