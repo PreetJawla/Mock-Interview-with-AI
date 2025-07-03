@@ -34,9 +34,11 @@ const setupRoutes = async () => {
   try {
     const { default: interviewRoutes } = await import('./routes/interview.js');
     const { default: feedbackRoutes } = await import('./routes/feedback.js');
+    const { default: geminiRoutes } = await import('./routes/gemini.js');
     
     app.use('/api/interview', interviewRoutes);
     app.use('/api/feedback', feedbackRoutes);
+    app.use('/api/gemini', geminiRoutes);
   } catch (error) {
     console.error('Error loading routes:', error);
   }
