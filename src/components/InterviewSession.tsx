@@ -196,7 +196,7 @@ export default InterviewSession;
 
 // Helper (replace with your actual Gemini API call)
 async function fetchQuestionsFromGemini(n: number, language: string, difficulty: string): Promise<string[]> {
-  const response = await api.get('/gemini/questions', {
+  const response = await api.get('/api/gemini/questions', {
     params: {
       n,
       language,
