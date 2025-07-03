@@ -23,18 +23,29 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onLanguageSelect })
   const [selectedCodingLanguage, setSelectedCodingLanguage] = useState<CodingLanguage | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel | null>(null);
 
-  const codingLanguages: CodingLanguage[] = [
-    { id: 'java', name: 'Java', icon: '☕', color: 'bg-orange-100 border-orange-300 text-orange-800' },
-    { id: 'cpp', name: 'C++', icon: '⚡', color: 'bg-blue-100 border-blue-300 text-blue-800' },
-    { id: 'python', name: 'Python', icon: '🐍', color: 'bg-green-100 border-green-300 text-green-800' },
-    { id: 'javascript', name: 'JavaScript', icon: '🟨', color: 'bg-yellow-100 border-yellow-300 text-yellow-800' },
-    { id: 'mern', name: 'MERN Stack', icon: '🚀', color: 'bg-purple-100 border-purple-300 text-purple-800' },
-    { id: 'sql', name: 'SQL', icon: '🗄️', color: 'bg-indigo-100 border-indigo-300 text-indigo-800' },
-    { id: 'dbms', name: 'DBMS', icon: '💾', color: 'bg-gray-100 border-gray-300 text-gray-800' },
-    { id: 'react', name: 'React', icon: '⚛️', color: 'bg-cyan-100 border-cyan-300 text-cyan-800' },
-    { id: 'nodejs', name: 'Node.js', icon: '🟢', color: 'bg-emerald-100 border-emerald-300 text-emerald-800' },
-    { id: 'dsa', name: 'Data Structures & Algorithms', icon: '🧮', color: 'bg-red-100 border-red-300 text-red-800' }
-  ];
+const codingLanguages: CodingLanguage[] = [
+  { id: 'java', name: 'Java', icon: '☕', color: 'bg-orange-100 border-orange-300 text-orange-800' },
+  { id: 'cpp', name: 'C++', icon: '⚡', color: 'bg-blue-100 border-blue-300 text-blue-800' },
+  { id: 'python', name: 'Python', icon: '🐍', color: 'bg-green-100 border-green-300 text-green-800' },
+  { id: 'javascript', name: 'JavaScript', icon: '🟨', color: 'bg-yellow-100 border-yellow-300 text-yellow-800' },
+  { id: 'mern', name: 'MERN Stack', icon: '🚀', color: 'bg-purple-100 border-purple-300 text-purple-800' },
+  { id: 'sql', name: 'SQL', icon: '🗄️', color: 'bg-indigo-100 border-indigo-300 text-indigo-800' },
+  { id: 'dbms', name: 'DBMS', icon: '💾', color: 'bg-gray-100 border-gray-300 text-gray-800' },
+  { id: 'react', name: 'React', icon: '⚛️', color: 'bg-cyan-100 border-cyan-300 text-cyan-800' },
+  { id: 'nodejs', name: 'Node.js', icon: '🟢', color: 'bg-emerald-100 border-emerald-300 text-emerald-800' },
+  { id: 'dsa', name: 'Data Structures & Algorithms', icon: '🧮', color: 'bg-red-100 border-red-300 text-red-800' },
+  { id: 'dotnet', name: '.NET', icon: '💠', color: 'bg-sky-100 border-sky-300 text-sky-800' },
+  { id: 'coding', name: 'Coding Challenge Questions', icon: '🧠', color: 'bg-pink-100 border-pink-300 text-pink-800' },
+  { id: 'cn', name: 'Computer Networks', icon: '🌐', color: 'bg-teal-100 border-teal-300 text-teal-800' },
+  { id: 'os', name: 'Operating System', icon: '🖥️', color: 'bg-lime-100 border-lime-300 text-lime-800' },
+  { id: 'oops', name: 'OOPs Concepts', icon: '📦', color: 'bg-fuchsia-100 border-fuchsia-300 text-fuchsia-800' },
+  { id: 'system-design', name: 'System Design', icon: '🏗️', color: 'bg-rose-100 border-rose-300 text-rose-800' },
+  { id: 'devops', name: 'DevOps', icon: '⚙️', color: 'bg-stone-100 border-stone-300 text-stone-800' },
+  { id: 'ai-ml', name: 'AI/ML Basics', icon: '🧠', color: 'bg-violet-100 border-violet-300 text-violet-800' },
+  { id: 'cloud', name: 'Cloud Computing', icon: '☁️', color: 'bg-blue-50 border-blue-200 text-blue-700' },
+  { id: 'linux', name: 'Linux & Shell', icon: '🐧', color: 'bg-neutral-100 border-neutral-300 text-neutral-800' }
+];
+
 
   const difficultyLevels: DifficultyLevel[] = [
     { 
