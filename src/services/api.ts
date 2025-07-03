@@ -29,7 +29,7 @@ export const generateFeedback = async (
   codingLanguage?: string, 
   difficulty?: string
 ) => {
-  const response = await api.post('/feedback/generate-feedback', {
+  const response = await api.post('/api/feedback/generate-feedback', {
     question,
     answer,
     language,
