@@ -2,14 +2,21 @@
 
 A full-stack MERN application that provides AI-powered mock interview practice with real-time speech recognition and personalized feedback.
 
+**GitHub Repository:**  
+[https://github.com/PreetJawla/Mock-Interview-with-AI](https://github.com/PreetJawla/Mock-Interview-with-AI)
+
+---
+
 ## Features
 
-- **Multi-language Support**: Practice interviews in 8 different languages
+- **Multi-domain Support**: Practice interviews in a wide range of technical domains
 - **AI-Powered Questions**: Dynamic interview questions generated using Gemini AI
 - **Real-time Speech Recognition**: Browser-based speech-to-text conversion
 - **Instant AI Feedback**: Constructive feedback and suggestions for improvement
 - **Clean Modern UI**: Responsive design with smooth animations
 - **20-Second Timer**: Timed responses to simulate real interview conditions
+
+---
 
 ## Tech Stack
 
@@ -25,6 +32,8 @@ A full-stack MERN application that provides AI-powered mock interview practice w
 - Gemini AI API for question generation and feedback
 - MongoDB (optional) for session storage
 - CORS enabled for cross-origin requests
+
+---
 
 ## Setup Instructions
 
@@ -71,24 +80,42 @@ npm run client
 npm run server
 ```
 
+---
+
 ## Usage
 
-1. **Select Language**: Choose from 8 supported languages
+1. **Select Technical Domain**: Choose from a wide range of supported domains
 2. **Generate Question**: Click to get an AI-generated interview question
-3. **Record Answer**: Speak your response within the 20-second timer
+3. **Record Answer**: Speak your response within the 20-second timer or type it manually
 4. **Get Feedback**: Receive detailed AI feedback on your answer
-5. **Continue Practice**: Move to the next question to keep practicing
+5. **Continue Practice**: Move to the next question or next set to keep practicing
 
-## Supported Languages
+---
 
-- English 🇺🇸
-- Hindi 🇮🇳
-- Spanish 🇪🇸
-- French 🇫🇷
-- German 🇩🇪
-- Japanese 🇯🇵
-- Korean 🇰🇷
-- Chinese 🇨🇳
+## Supported Technical Domains
+
+- Java
+- C++
+- Python
+- JavaScript
+- MERN Stack
+- SQL
+- DBMS
+- React
+- Node.js
+- Data Structures & Algorithms
+- .NET
+- Coding Challenge Questions
+- Computer Networks
+- Operating System
+- OOPs Concepts
+- System Design
+- DevOps
+- AI/ML Basics
+- Cloud Computing
+- Linux & Shell
+
+---
 
 ## Browser Compatibility
 
@@ -98,17 +125,21 @@ The Speech Recognition API is supported in:
 - Safari (limited support)
 - Firefox (limited support)
 
+---
+
 ## API Endpoints
 
 ### Interview Routes
+- `GET /api/gemini/questions` - Generate interview questions (with domain and difficulty)
 - `GET /api/interview/languages` - Get supported languages
-- `POST /api/interview/generate-question` - Generate interview question
 
 ### Feedback Routes
 - `POST /api/feedback/generate-feedback` - Generate AI feedback
 
 ### Health Check
 - `GET /api/health` - Server health status
+
+---
 
 ## Project Structure
 
@@ -128,7 +159,7 @@ The Speech Recognition API is supported in:
 │   └── App.tsx
 ├── server/
 │   ├── routes/            # Express routes
-│   │   ├── interview.js
+│   │   ├── gemini.js
 │   │   └── feedback.js
 │   ├── models/            # MongoDB models
 │   │   └── Session.js
@@ -136,18 +167,19 @@ The Speech Recognition API is supported in:
 └── README.md
 ```
 
+---
+
 ## Customization
 
-### Adding New Languages
+### Adding New Domains
 
-1. Update the languages array in `server/routes/interview.js`
-2. Add language codes to the mapping in `SpeechRecorder.tsx`
-3. Test speech recognition support for the new language
+1. Update the `codingLanguages` array in `src/components/LanguageSelector.tsx`
+2. Ensure your backend prompt in `server/routes/gemini.js` uses the selected domain and difficulty
 
 ### Modifying AI Prompts
 
 Edit the prompts in:
-- `server/routes/interview.js` - Question generation
+- `server/routes/gemini.js` - Question generation
 - `server/routes/feedback.js` - Feedback generation
 
 ### Styling
@@ -157,6 +189,26 @@ The app uses Tailwind CSS. Customize the design by:
 - Updating the color scheme in `tailwind.config.js`
 - Adding custom CSS in `src/index.css`
 
+---
+
+## Deployment
+
+### Frontend
+
+You can deploy the frontend (React app) on [Netlify](https://netlify.com), [Vercel](https://vercel.com), or any static hosting provider:
+
+```bash
+npm run build
+```
+- Deploy the `dist` (Vite) or `build` (CRA) folder.
+
+### Backend
+
+Deploy your backend (Express server) on [Render](https://render.com), [Railway](https://railway.app), [Heroku](https://heroku.com), or similar.  
+**Update your frontend API URLs to point to your deployed backend.**
+
+---
+
 ## Contributing
 
 1. Fork the repository
@@ -165,6 +217,10 @@ The app uses Tailwind CSS. Customize the design by:
 4. Test thoroughly
 5. Submit a pull request
 
+---
+
 ## License
 
 This project is licensed under the MIT License.
+
+---
