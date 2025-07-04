@@ -8,7 +8,9 @@ router.get('/questions', async (req, res) => {
   const n = parseInt(req.query.n) || 5;
   const language = req.query.language || 'Java';
   const difficulty = req.query.difficulty || 'Intermediate';
-  const prompt = `Generate ${n} unique technical interview questions for ${language} at ${difficulty} level. Return only the questions as a JSON array of strings.`;
+  // Add a random seed to the prompt to encourage variety
+  const randomSeed = Math.random().toString(36).substring(2, 10);
+  const prompt = `Generate ${n} unique and different technical interview questions for ${language} at ${difficulty} level. Make sure the questions are not repeated from previous requests. Random seed: ${randomSeed}. Return only the questions as a JSON array of strings.`;
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
