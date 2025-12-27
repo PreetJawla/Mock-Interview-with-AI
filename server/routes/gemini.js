@@ -1,8 +1,8 @@
 import express from 'express';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 
 const router = express.Router();
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
 
 router.get('/questions', async (req, res) => {
   const n = parseInt(req.query.n) || 5;
@@ -13,9 +13,11 @@ router.get('/questions', async (req, res) => {
   const prompt = `Generate ${n} unique and different technical interview questions for ${language} at ${difficulty} level. Make sure the questions are not repeated from previous requests. Random seed: ${randomSeed}. Return only the questions as a JSON array of strings.`;
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    const result = await model.generateContent(prompt);
-    let text = result.response.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+    });
+    let text = response.text || '[]';
     // Extract the first JSON array from the text
     const match = text.match(/\[[\s\S]*?\]/);
     if (!match) throw new Error('No JSON array found in Gemini response');
