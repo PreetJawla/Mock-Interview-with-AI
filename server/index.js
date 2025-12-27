@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import mongoose from 'mongoose';
 
 // Load environment variables
@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Gemini AI
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
 
 // Optional: MongoDB connection - only connect if URI is provided
 if (process.env.MONGODB_URI) {
@@ -71,4 +71,4 @@ setupRoutes().then(() => {
   process.exit(1);
 });
 
-export { genAI };
+export { ai };
