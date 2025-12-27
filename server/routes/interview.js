@@ -25,6 +25,17 @@ router.post('/generate-question', async (req, res) => {
       ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
     }
 
+    // Build the prompt for question generation
+    const prompt = `Generate a single ${difficulty} level technical interview question about ${language}${category !== 'general' ? ` focusing on ${category}` : ''}. 
+
+The question should:
+- Be clear and specific
+- Be appropriate for a ${difficulty} difficulty level
+- Test practical knowledge
+- Be answerable in 2-5 minutes
+
+Return only the question text, nothing else.`;
+
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: prompt,

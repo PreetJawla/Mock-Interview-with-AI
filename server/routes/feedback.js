@@ -25,6 +25,24 @@ router.post('/generate-feedback', async (req, res) => {
       ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
     }
 
+    // Build the prompt for feedback generation
+    const prompt = `You are an expert technical interviewer. Evaluate the following interview response:
+
+Question: ${question}
+Candidate's Answer: ${answer}
+Spoken Language: ${language}
+${codingLanguage ? `Programming Language: ${codingLanguage}` : ''}
+${difficulty ? `Difficulty Level: ${difficulty}` : ''}
+
+Provide constructive feedback including:
+1. Strengths of the answer
+2. Areas for improvement
+3. Accuracy and completeness
+4. Clarity and communication
+5. A rating out of 10
+
+Be specific and actionable in your feedback.`;
+
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: prompt,
