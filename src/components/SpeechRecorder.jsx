@@ -1,20 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 // @ts-ignore
-const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-type SpeechRecognition = typeof SpeechRecognition;
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-interface SpeechRecorderProps {
-  question: string;
-  onAnswerComplete: (answer: string) => void;
-}
-
-const SpeechRecorder: React.FC<SpeechRecorderProps> = ({ question, onAnswerComplete }) => {
+const SpeechRecorder = ({ question, onAnswerComplete }) => {
   const [transcript, setTranscript] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [timeLeft, setTimeLeft] = useState(20);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const recognitionRef = useRef(null);
+  const timerRef = useRef(null);
 
   // Reset state when question changes
   useEffect(() => {
@@ -82,30 +76,38 @@ const SpeechRecorder: React.FC<SpeechRecorderProps> = ({ question, onAnswerCompl
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
+    <div className="card">
       <div className="mb-6">
-        <h2 className="text-xl font-bold mb-2">Question</h2>
-        <div className="bg-gray-50 rounded-xl p-4">{question}</div>
+        <h2 className="card-title">Question</h2>
+        <div style={{ backgroundColor: 'var(--background)', padding: '1rem', borderRadius: 'var(--radius)' }}>
+          {question}
+        </div>
       </div>
-      <div className="mb-4 flex items-center gap-4">
+      
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
         <button
           onClick={isRecording ? stopRecording : startRecording}
-          className={`px-4 py-2 rounded ${isRecording ? 'bg-red-500' : 'bg-blue-500'} text-white font-semibold`}
+          className={isRecording ? 'btn btn-secondary' : 'btn btn-primary'}
+          style={isRecording ? { backgroundColor: '#ef4444' } : {}}
         >
           {isRecording ? 'Stop Recording' : 'Record (20s)'}
         </button>
-        {isRecording && <span>{timeLeft}s</span>}
+        {isRecording && <span style={{ fontWeight: 'bold', color: '#ef4444' }}>{timeLeft}s</span>}
       </div>
+      
       <textarea
-        className="w-full h-32 p-3 border border-gray-300 rounded-xl mb-4"
+        className="transcript-box"
         value={transcript}
         onChange={(e) => setTranscript(e.target.value)}
         placeholder="Speak or type your answer here..."
+        style={{ marginBottom: '1rem' }}
       />
-      <div className="text-right">
+      
+      <div style={{ textAlign: 'right' }}>
         <button
           onClick={handleSubmit}
-          className="bg-green-600 text-white px-6 py-2 rounded-xl font-semibold"
+          className="btn btn-primary"
+          style={{ backgroundColor: '#10b981' }}
           disabled={!transcript.trim()}
         >
           Submit Answer

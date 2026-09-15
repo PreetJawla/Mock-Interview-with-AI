@@ -1,0 +1,52 @@
+import axios from "axios";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
+
+console.log("API_BASE_URL at runtime:", API_BASE_URL);
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Interview API functions
+export const generateQuestion = async (
+  language,
+  difficulty = "medium",
+  category = "general"
+) => {
+  const response = await api.post("/interview/generate-question", {
+    language,
+    difficulty,
+    category,
+  });
+  return response.data;
+};
+
+// Feedback API functions
+export const generateFeedback = async (
+  question,
+  answer,
+  language,
+  codingLanguage,
+  difficulty
+) => {
+  const response = await api.post("/api/feedback/generate-feedback", {
+    question,
+    answer,
+    language,
+    codingLanguage,
+    difficulty,
+  });
+  return response.data;
+};
+
+// Health check
+export const checkHealth = async () => {
+  const response = await api.get("/health");
+  return response.data;
+};
+
+export default api;
